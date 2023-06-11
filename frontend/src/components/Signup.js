@@ -3,6 +3,10 @@ import React from 'react'
 
 
 export default function Signup() {
+
+  function onClick(){
+    alert("oh uh! our servers are full right now! Try again some other time. You can log in In the meanwhile if you have an existing account ")
+  }
   return (
     <div className='centered'>
         <form className="form-horizontal">
@@ -50,7 +54,7 @@ export default function Signup() {
 
   <div className="form-group">
     <div className="col-sm-offset-2 col-sm-10">
-      <button type="submit" className="btn btn-default">Sign Up</button>
+      <button type="submit" className="btn btn-default" onClick={onClick}>Sign Up</button>
     </div>
   </div>
 

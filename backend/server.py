@@ -88,21 +88,45 @@ class BankingApp:
                 return f"Transfer to {recipient_name} successful, Remaining Balance is: {sender.balance}"
         return False
 
+    '''magic method that allows us to customize the behavior of 'in' operator '''
+    #equals,lesser than, greater than magic methods to implement 
+    #3 diff methods
+    #testing 123
+    #abc
+    
+    def __contains__(self,name):
+        return name.lower() in self.db
+
+    '''defining lesser than,greater than, and equal to magic methods'''
+    def __lt__(self,other):
+        return self.balance < other.balance
+    
+    def __gt__(self,other):
+        return self.balance > other.balance
+    
+    def __eq__(self,other):
+        return self.balance == other.balance
+    
+    
     def compare_accounts(self, name1, name2):
         name1 = name1.lower()
         name2 = name2.lower()
+        account1 = self.db[name1].balance
+        account2 = self.db[name2].balance
+        print(account1,account2)
 
         try:
 
-            if name1 in self.db and name2 in self.db:
-                balance1 = self.db[name1].balance
-                balance2 = self.db[name2].balance
-                if balance1 > balance2:
-                    return f"{name1} has more money than {name2}"
-                elif balance1 < balance2:
-                    return f"{name2} has more money than {name1}"
-                else:
-                    return "Both accounts have the same balance"
+            # if name1 in self and name2 in self:
+            #     balance1 = self.db[name1].balance
+            #     balance2 = self.db[name2].balance
+
+            if account1 > account2:
+                return f"{name1} has more money than {name2}"
+            elif account1 < account2:
+                return f"{name2} has more money than {name1}"
+            elif account1 == account2:
+                return "Both accounts have the same balance"
             else:
                 return "Account not found!"
         except KeyError:
